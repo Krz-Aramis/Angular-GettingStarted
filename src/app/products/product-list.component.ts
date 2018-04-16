@@ -8,7 +8,8 @@ import { IProduct } from './product' ;
 })
 export class ProductListComponent implements OnInit {
 
-  pageTitle : string = 'Product List [v3]' ;
+  private _defaultTitle: string = 'Product List';
+  pageTitle : string ;
   imageWidth : number = 50;
   imageMargin: number = 2;
   showImage : boolean = false ;
@@ -50,6 +51,7 @@ export class ProductListComponent implements OnInit {
   constructor() {
     this.filteredProducts = this.products;
     this.listFilter = '';
+    this.pageTitle = this._defaultTitle ;
   }
 
   toggleImage(): void {
@@ -64,6 +66,10 @@ export class ProductListComponent implements OnInit {
     filterBy = filterBy.toLowerCase();
     return this.products.filter((product: IProduct) => 
                                  product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+  onRatingClicked(message: string): void {
+    this.pageTitle = this._defaultTitle + ' ' + message ;
   }
 
 }
