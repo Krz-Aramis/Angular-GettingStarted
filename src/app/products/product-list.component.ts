@@ -10,12 +10,14 @@ import { ProductService } from './product.service';
 export class ProductListComponent implements OnInit {
 
   private _defaultTitle: string = 'Product List';
-  pageTitle : string ;
-  imageWidth : number = 50;
+  pageTitle: string ;
+  imageWidth: number = 50;
   imageMargin: number = 2;
-  showImage : boolean = false ;
+  showImage: boolean = false ;
   _listFilter: string ;
   errorMessage: string ;
+  filteredProducts: IProduct[];
+  products: IProduct[] ;
 
   get listFilter(): string {
     return this._listFilter;
@@ -24,10 +26,6 @@ export class ProductListComponent implements OnInit {
     this._listFilter = value ;
     this.filteredProducts = this.listFilter ? this.performFilter(this._listFilter) : this.products ;
   }
-
-  filteredProducts: IProduct[];
-
-  products: IProduct[] ;
 
   constructor(private _productService: ProductService ) {
     this.pageTitle = this._defaultTitle ;
@@ -49,9 +47,9 @@ export class ProductListComponent implements OnInit {
                         );
   }
 
-  performFilter(filterBy: string) : IProduct[] {
+  performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLowerCase();
-    return this.products.filter((product: IProduct) => 
+    return this.products.filter((product: IProduct) =>
                                  product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
