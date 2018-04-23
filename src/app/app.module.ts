@@ -4,23 +4,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './home/welcome.component';
+import { AppRoutingModule } from './app-routing.module';
 import { ProductModule } from './products/product.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    WelcomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full'},
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
-    ], {useHash: true } ),
-    ProductModule
+    /* *
+     * Product is imported FIRST so that the routing works correctly.
+     * We need to ensure that the specific routes are loaded first!
+     * */
+    ProductModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
