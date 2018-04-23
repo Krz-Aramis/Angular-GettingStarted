@@ -2,6 +2,50 @@
   <div class='panel-heading'>
     {{ pageTitle + ': ' + product.productName }}
   </div>
+
+  <div class='table-responsive'>
+    <table class='table'>
+      <tbody>
+        <tr>
+          <!-- This is a row header, hence: Title/data -->
+          <th rowspan='6'> <img 
+                [src]='product.imageUrl' 
+                [title]='product.productName'
+                > 
+          </th>
+        </tr>
+        <tr>
+          <th>Name:</th>
+          <td>{{ product.productName }}</td>
+        </tr>
+        <tr>
+          <th>Code:</th>
+          <td>
+            {{ product.productCode | lowercase | convertToSpaces:'#' }}
+          </td>
+        </tr>
+        <tr>
+          <th>Available</th>
+          <td> {{ product.releaseDate}} </td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td>
+            {{product.price | currency:'GBP':true:'1.2-2' }}
+          </td>
+        </tr>
+        <tr>
+          <th>Star Rating</th>
+          <td>
+              <pm-star
+              [rating]='product.starRating'>
+             </pm-star>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class='panel-footer'>
     <a class='btn btn-default' (click)='onBack()' style='width:80px'>
       <i class='glyphicon glyphicon-chevron-left'></i> Back
